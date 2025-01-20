@@ -367,7 +367,7 @@ async def feedback(message: Message, state: FSMContext):
     save_to_pickle("feedback.pickle", feed)
     await bot.send_message(message.chat_id, "Спасибо за ваш отзыв!!!")
 
-@dp.message(F.text, Form.my_events)
+@dp.message(F.text, Form.my_events, Command("my_event"))
 async def my_events(message: Message, state: FSMContext):
     manager = managers.get(message.chat.id, None)
     if(manager != None):
@@ -710,7 +710,7 @@ async def continue_gen(message: Message, state: FSMContext):
         await state.set_state(Form.gen_schedule_giga)
 
 async def start_bot():
-    commands = [BotCommand(command='com1', description='Команда1'),
+    commands = [BotCommand(command='my_event', description='Мои мероприяти'),
                 BotCommand(command='com2', description='Команда2')]
     await bot.set_my_commands(commands, BotCommandScopeDefault())
 
